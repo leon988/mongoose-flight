@@ -1,0 +1,49 @@
+<%- include('../partials/header') %>
+
+<h2>Enter a New Flight</h2>
+<form action="/flights" method="POST" id="form">
+  <label>Airline:
+    <select name="airline" />
+      <option value="American" selected>American</option>
+      <option value="Southwest">Southwest</option>
+      <option value="United">United</option>
+    </select>
+  </label><br/>
+  <label>Departure Airport:
+    <select name="airport">
+      <option value="AUS">AUS</option>
+      <option value="DFW">DFW</option>
+      <option value="DEN" selected>DEN</option>
+      <option value="LAX">LAX</option>
+      <option value="SAN">SAN</option>
+    </select>
+  </label><br>
+  <label>Flight Number:
+    <input type="number" name="flightNo" min="10" max="9999" required />
+  </label><br/>
+  <label>Departs:
+    <input type="datetime-local" 
+    name="departs"
+    value="2025-01-1T12:00"
+    min="2025-01-1T00:00"
+    max="2026-01-1T00:00">
+  </label><br>
+  <button type="submit" min="2025-01-01T00:00"> Add Flight </button>
+</form>
+<p><%= errorMsg %></p>
+
+<!-- Flight details -->
+<h1>Flight Details</h1>
+<p>Flight Number: <%= flight.flightNumber %></p>
+<!-- Add more flight details as needed -->
+
+<!-- Tickets -->
+<h2>Tickets</h2>
+<ul>
+  <% tickets.forEach(function(ticket) { %>
+    <li>Ticket ID: <%= ticket._id %></li>
+    <!-- Add more ticket details as needed -->
+  <% }) %>
+</ul>
+
+<%- include('../partials/footer') %>

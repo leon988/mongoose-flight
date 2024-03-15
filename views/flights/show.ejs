@@ -1,0 +1,88 @@
+<%- include('../partials/header') %>
+
+<section id="show-page">
+  <div>Airline: </div>
+  <div><%= flight.airline %></div>
+  <div> Airport: </div>
+  <div><%= flight.airport %></div>
+  <div>Flight Number: </div>
+  <div><%= flight.flightNo%></div>
+  <div>Departs: </div>
+  <div><%= flight.departs %></div>
+</section>
+
+<a href="/flights/<%= flight._id %>/tickets/new">New Ticket</a>
+
+<!-- new markup below -->
+<br><br> <!-- Add Destination Form -->
+<h2>Add Destination</h2>
+<form id="add-destination-form" method="POST" action="/flights/<%= flight._id %>/destinations">
+  <label for="destination">Destination:</label>
+  <input type="string" name="destination" required>
+  
+  <label for="arrival">Arrival:</label>
+  <input type="datetime-local" name="arrival" required>
+  
+  <label for="airport">Airport:</label>
+  <select name="airport">
+    <option value="AUS">AUS</option>
+    <option value="DFW">DFW</option>
+    <option value="DEN" selected>DEN</option>
+    <option value="LAX">LAX</option>
+    <option value="SAN">SAN</option>
+  </select>
+  
+  <button type="submit">Add Destination</button>
+</form>
+
+<!-- Display Destinations Table -->
+<% if (flight.destinations.length) { %>
+  <h2>Destinations</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Destination</th>
+        <th>Arrival</th>
+        <th>Airport</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% flight.destinations.forEach(function(d) { %>
+        <tr>
+          <td><%= d.destination %></td>
+          <td><%= d.arrival.toLocaleDateString() %></td>
+          <td><%= d.airport %></td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+<% } else { %>
+  <h2>No Destinations Yet</h2>
+<% } %>
+
+
+<% if (flight.tickets.length) { %>
+  <h2>Ticket</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Seat</th>
+        <th>Price</th>
+        <th>Flight</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% flight.tickets.forEach(function(t) { %>
+        <tr>
+          <td><%= t.seat %></td>
+          <td><%= t.price %></td>
+          <td><%= t.flight %></td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+<% } else { %>
+  <h2>No Tickets Yet</h2>
+<% } %>
+
+<%- include('../partials/footer') %>
