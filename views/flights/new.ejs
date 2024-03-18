@@ -34,15 +34,13 @@
 
 <!-- Flight details -->
 <h1>Flight Details</h1>
-<p>Flight Number: <%= flight.flightNumber %></p>
-<!-- Add more flight details as needed -->
+<p>Flight Number: <%= flight.flightNo %></p>
 
 <!-- Tickets -->
 <h2>Tickets</h2>
 <ul>
   <% tickets.forEach(function(ticket) { %>
     <li>Ticket ID: <%= ticket._id %></li>
-    <!-- Add more ticket details as needed -->
   <% }) %>
 </ul>
 

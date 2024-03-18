@@ -22,9 +22,10 @@ async function newTicket(req,res){
 async function create(req, res) {
   try {
     req.body.flight = req.params.id;
-    const tickets = await Ticket.create(req.body);
+    const newTicket = await Ticket.create(req.body);
     const flight = await Flight.findById(req.params.id);
-    flight.tickets.push();
+    flight.tickets.push(newTicket);
+    await flight.save();
   } catch(err){
     console.log(err)
   }
